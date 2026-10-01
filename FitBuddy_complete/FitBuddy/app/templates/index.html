@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="FitBuddy AI-powered personalized 7-day fitness planner">
+  <title>FitBuddy — AI Fitness Planner</title>
+  <link rel="stylesheet" href="{{ url_for('static', path='css/style.css') }}">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">Fit<span>Buddy</span></div>
+  <a href="/docs" target="_blank" rel="noopener">API Docs</a>
+</header>
+
+<main class="container">
+  <section class="hero">
+    <p class="eyebrow">AI-POWERED WELLNESS</p>
+    <h1>Your personalized 7-day fitness plan.</h1>
+    <p class="hero-copy">Tell FitBuddy your goal, experience, intensity, and equipment. Gemini can create a structured plan, while the built-in fallback keeps the app usable even without an API key.</p>
+  </section>
+
+  <section class="grid">
+    <form id="planForm" class="card form-card">
+      <h2>Create your plan</h2>
+
+      <label>Name
+        <input id="name" name="name" required minlength="2" maxlength="100" placeholder="Your name">
+      </label>
+
+      <div class="two-col">
+        <label>Age
+          <input id="age" name="age" type="number" min="13" max="100" required value="24">
+        </label>
+        <label>Weight (kg)
+          <input id="weight_kg" name="weight_kg" type="number" min="20" max="400" step="0.1" required value="60">
+        </label>
+      </div>
+
+      <label>Fitness goal
+        <select id="goal" name="goal">
+          <option value="weight loss">Weight loss</option>
+          <option value="muscle gain">Muscle gain</option>
+          <option value="general wellness" selected>General wellness</option>
+        </select>
+      </label>
+
+      <div class="two-col">
+        <label>Intensity
+          <select id="intensity" name="intensity">
+            <option value="low">Low</option>
+            <option value="medium" selected>Medium</option>
+            <option value="high">High</option>
+          </select>
+        </label>
+        <label>Experience
+          <select id="experience" name="experience">
+            <option value="beginner" selected>Beginner</option>
+            <option value="intermediate">Intermediate</option>
+            <option value="advanced">Advanced</option>
+          </select>
+        </label>
+      </div>
+
+      <label>Equipment
+        <select id="equipment" name="equipment">
+          <option value="home" selected>Home</option>
+          <option value="gym">Gym</option>
+          <option value="bodyweight">Bodyweight only</option>
+        </select>
+      </label>
+
+      <button type="submit" class="primary">Generate 7-day plan</button>
+      <p id="formMessage" class="message"></p>
+    </form>
+
+    <section id="results" class="card results-card">
+      <div class="empty-state">
+        <div class="empty-icon">✦</div>
+        <h2>Your plan will appear here</h2>
+        <p>Complete the form to generate your personalized routine.</p>
+      </div>
+    </section>
+  </section>
+
+  <section class="card history-card">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">SAVED PLANS</p>
+        <h2>Recent plans</h2>
+      </div>
+      <button id="refreshHistory" class="secondary">Refresh</button>
+    </div>
+    <div id="history">Loading...</div>
+  </section>
+
+  <section class="disclaimer">
+    <strong>Wellness disclaimer:</strong> FitBuddy provides general fitness and nutrition guidance and is not medical advice. Stop exercise if you experience pain, dizziness, or unusual symptoms and seek qualified professional guidance when appropriate.
+  </section>
+</main>
+
+<script src="{{ url_for('static', path='js/app.js') }}"></script>
+</body>
+</html>
